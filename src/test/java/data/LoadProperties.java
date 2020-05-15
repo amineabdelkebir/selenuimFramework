@@ -9,7 +9,7 @@ import java.util.Properties;
 public class LoadProperties {
 
    static  String path = "C:\\Users\\Amine\\eclipse-workspace\\taf\\src\\main\\java\\properties\\userdata.properties";
-   public static Properties userdata = loadProperties(path);
+//   public static Properties userdata = loadProperties(path);
 
 	private static Properties loadProperties(String path) throws FileNotFoundException
 	{

@@ -8,7 +8,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+
 import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
@@ -18,7 +20,7 @@ import org.testng.annotations.Parameters;
 
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 import utilities.Helper;
-public class TestBases extends  AbstractTestNGCucumberTests
+public class TestBases 
 
 {
 
@@ -40,7 +42,7 @@ public class TestBases extends  AbstractTestNGCucumberTests
 	@BeforeSuite
 	@Parameters({"browser"})
 
-	public void startdriver(@Optional("Chrome") String	browserName)
+	public void startdriver(@Optional("chrome") String	browserName)
 
 	{
 		if (browserName.equalsIgnoreCase("chrome")) {
@@ -55,7 +57,18 @@ public class TestBases extends  AbstractTestNGCucumberTests
 		else if (browserName.equalsIgnoreCase("internetexplorer")) {
 			System.setProperty("webdriver.ie.driver",System.getProperty("user.dir")+"/drivers/IEDriverServer.exe"); 
 			driver = new InternetExplorerDriver();
+		}
+		else if(browserName.equalsIgnoreCase("headless")) 
+		{
+			DesiredCapabilities caps = new DesiredCapabilities();
+			caps.setJavascriptEnabled(true);
+			caps.setCapability("phantomjs.binary.path",
+					System.getProperty(("user.dir")+"/drivers/phantomjs.exe"));
+			String[] phantomJsArgs = {"--web-secutity=no","--ignore-ssl-errors=yes"};
 
+		/*	caps.setCapability(PhantomJSDriverService.PHANTOMJS_GHOSTDRIVER_CLI_ARGS,phantomJsArgs);
+			driver = new PhantomJSDriver(caps);
+*/
 
 		}
 		driver.manage().window().maximize();

@@ -9,8 +9,8 @@ import pages.HomePage;
 import pages.LoginPage;
 import pages.UserRegestrationPage;
 
-public class UserRegistrationwithJAVAFAKER extends TestBases {
-
+public class UserRegistrationUsingGrid extends TestBases2 {
+ 
 
 	HomePage homeObject;
 	UserRegestrationPage registerObject;
@@ -24,9 +24,9 @@ public class UserRegistrationwithJAVAFAKER extends TestBases {
 	@Test(priority = 1,alwaysRun = true)
 	public void usercanregistersuccssfuly()
 	{
-		homeObject = new HomePage(driver);
+		homeObject = new HomePage(getdriver());
 		homeObject.openresgistrationpage();
-		registerObject = new UserRegestrationPage(driver);
+		registerObject = new UserRegestrationPage(getdriver());
 		registerObject.userRegistration(firstname,lastname,email,password);
 		Assert.assertTrue(registerObject.successregnotif.getText().contains("Your registration completed"));
 	}
@@ -42,7 +42,7 @@ public class UserRegistrationwithJAVAFAKER extends TestBases {
 	public void registredusercanlogin()
 	{
 		homeObject.openloginpage();
-		loginObject = new LoginPage(driver);
+		loginObject = new LoginPage(getdriver());
 		loginObject.userlogin(email,password);
 		Assert.assertTrue(registerObject.logoutlink.getText().equals("Log out"));
 	}
